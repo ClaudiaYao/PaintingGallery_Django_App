@@ -2,21 +2,22 @@
 
 {% block content %}
 
+
 <!-- Main Section -->
-<main class="projects">
+<main class="home">
     <section class="hero-section text-center">
         <div class="container container--narrow">
-            <br>
             <div class="hero-section__box">
-                <h2>Search for <span>Paintings</span></h2>
+                <h2>CONNECT WITH <span>ARTISTS</span></h2>
+                <h2>FROM AROUND THE WORLD</h2>
             </div>
 
             <div class="hero-section__search">
                 <form class="form" action="#" method="get">
                     <div class="form__field">
-                        <label for="formInput#search">Search By Paintings </label>
+                        <label for="formInput#search">Search Artists </label>
                         <input class="input input--text" id="formInput#search" type="text" name="text"
-                            placeholder="Search by Painting Title" />
+                            placeholder="Search by developer name" />
                     </div>
 
                     <input class="btn btn--sub btn--lg" type="submit" value="Search" />
@@ -24,41 +25,36 @@
             </div>
         </div>
     </section>
-
-
     <!-- Search Result: DevList -->
-    <section class="projectsList">
+    <section class="devlist">
         <div class="container">
             <div class="grid grid--three">
 
-                {% for painting in paintings %}
-                <div class="column">
-                    <div class="card project">
-                        <a href="{% url 'painting' painting.id %}" class="project">
-                            <img class="project__thumbnail" src="{{painting.featured_image.url}}"
-                                alt="project thumbnail" />
-                            <div class="card__body">
-                                <h3 class="project__title">{{painting.title}}</h3>
-                                <p><a class="project__author" href="{% url 'profile' painting.owner.id %}">By
-                                        {{painting.owner.name}}</a></p>
-                                <span class="project--rating">Average Score:
-                                    <span style="font-weight: bold;">{{painting.vote_score}}</span>
-                                    <span>({{painting.vote_total}} Vote{{painting.vote_total|pluralize:"s"}})</span>
-                                    </p>
-                                    <div class="project__tags">
-                                        {% for tag in painting.tags.all %}
-                                        <span class="tag tag--pill tag--main">
-                                            <small>{{tag.name}}</small>
-                                        </span>
-                                        {% endfor %}
-                                    </div>
+                {% for profile in profiles %}
+                <div class="column card">
+                    <div class="dev">
+                        <a href="{% url 'single-profile' profile.id %}" class="card__body">
+                            <div class="dev__profile">
+                                <img class="avatar avatar--md" src="{{ profile.profile_image.url }}" alt="image" />
+                                <div class="dev__meta">
+                                    <h3>{{profile.username}}</h3>
+                                    <h5>{{profile.short_intro}}</h5>
+                                </div>
+                            </div>
+                            <p class="dev__info">
+                                {{profile.bio|slice:"150"}}
+                            </p>
+                            <div class="dev__skills">
+                                {% for skill in profile.skill_set.all|slice:"5" %}
+                                <span class="tag tag--pill tag--main">
+                                    <small>{{skill}}</small>
+                                </span>
+                                {% endfor %}
                             </div>
                         </a>
                     </div>
                 </div>
                 {% endfor %}
-
-
 
             </div>
         </div>

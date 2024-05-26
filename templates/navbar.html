@@ -1,3 +1,25 @@
 {% load static %}
-<!-- <img src="{% static 'images/logo.png' %}">
-<a href="{% url 'new-painting' %}"></a> -->
+
+<!-- Header Section -->
+<header class="header">
+    <div class="container container--narrow">
+        <a href="{% url 'paintings' %}" class="header__logo">
+            <img src="{% static 'images/logo.png' %}" alt="TheCodingFun Logo" />
+        </a>
+        <nav class="header__nav">
+            <input type="checkbox" id="responsive-menu" />
+            <label for="responsive-menu" class="toggle-menu">
+                <span>Menu</span>
+                <div class="toggle-menu__lines"></div>
+            </label>
+            <ul class="header__menu">
+                <li class="header__menuItem"><a href="{% url 'profiles' %}">Artists</a></li>
+                <li class="header__menuItem"><a href="{% url 'paintings' %}">Paintings</a></li>
+                <li class="header__menuItem"><a href="inbox.html">Inbox</a></li>
+                <li class="header__menuItem"><a href="{% url 'new-painting' %}" class="btn btn--sub">Add
+                        Painting</a></li>
+                <li class="header__menuItem"><a href="login.html" class="btn btn--sub">Login/Sign Up</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>

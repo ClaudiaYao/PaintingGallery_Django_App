@@ -71,11 +71,12 @@ img {
 }
 
 .project--thumbnail {
-  height: 250px;
-  object-fit:cover;
-  display: block !important;
+  width: 50rem;
+  height: 25rem;
+  object-fit:contain;
   object-position: center;
- 
+  margin-bottom: 1em;
+
 }
 
 @media screen and (max-width: 800px) {
@@ -403,6 +404,7 @@ img {
   font-size: 1.65rem;
   font-weight: 500;
   color: var(--color-sub-light);
+  min-width: 180px;
 }
 
 @media screen and (min-width: 700px) {
@@ -524,11 +526,11 @@ img {
 /*========== Projects ==========*/
 
 .project__thumbnail {
+  width: 35rem;
   height: 25rem;
-  object-fit:fill;
-  object-position: center;
-  margin-bottom: 3rem;
-  border-radius: 0.7rem;
+  object-fit:cover;
+  object-position: top;
+  margin-bottom: 1em;
 }
 
 .project__title {

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'paintings.apps.PaintingsConfig',
+    "users.apps.UsersConfig",
 ]
 
 MIDDLEWARE = [
