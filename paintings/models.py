@@ -17,12 +17,32 @@ class Painting(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def reviewers(self):
+        queryset = self.review_set.all().values_list('owner__id', flat=True)
+        return queryset
+
+    def getVoteScore(self):
+        reviews = self.review_set.all()
+        total_score = 0
+        
+        for review in reviews:
+            total_score += int(review.value)
+        self.vote_total = reviews.count()
+        self.vote_score = int(round(total_score / self.vote_total))
+        self.save()
+
+
+    class Meta:
+        ordering = ['-vote_score', "-vote_total", "title"]
     
 class Review(models.Model):
-    VOTE_TYPE = [("Average", 1), 
-                 ("Nice", 2), 
-                 ('Great', 3),
-                 ('Amazing', 4)]
+    VOTE_TYPE = [("1", "Just Pass👌🏼"), 
+                ("2", "Nice👍"), 
+                ("3", 'Look Good!😍'),
+                ("4", 'Wonderful!🤩')]
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     painting = models.ForeignKey(Painting, on_delete=models.CASCADE)
     body = models.TextField(null=True, blank=True)
     value = models.CharField(max_length=200, choices=VOTE_TYPE)
@@ -31,6 +51,9 @@ class Review(models.Model):
 
     def __str__(self):
         return self.value
+    
+    class Meta:
+        unique_together = [['owner', 'painting']]
     
 class Tag(models.Model):
     name = models.CharField(max_length=200)

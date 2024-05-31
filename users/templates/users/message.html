@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Main Section -->
+<main class="messagePage my-xl">
+    <div class="content-box">
+        <div class="message">
+            <a class="backButton" href="{% url 'inbox' %}"><i class="im im-angle-left"><img
+                        src="{% static 'images/back_arrow.png' width=40 height=40 %}"></img></i></a>
+            <h2 class="message__subject">{{message.subject}}</h4>
+                <a href="profile.html" class="message__author">{{message.name}}</a>
+                <p class="message__date">{{message.created}}</p>
+                <div class="message__body">
+                    {{message.body}}
+                    <br><br><br><br>
+                </div>
+        </div>
+    </div>
+</main>
+
+
+{% endblock %}

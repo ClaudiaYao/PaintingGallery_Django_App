@@ -1,4 +1,4 @@
-super user: claudia
+super user: claudia_2030
 pwd: same as gmail
 
 user: david

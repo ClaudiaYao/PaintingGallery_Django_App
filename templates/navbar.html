@@ -15,10 +15,17 @@
             <ul class="header__menu">
                 <li class="header__menuItem"><a href="{% url 'profiles' %}">Artists</a></li>
                 <li class="header__menuItem"><a href="{% url 'paintings' %}">Paintings</a></li>
-                <li class="header__menuItem"><a href="inbox.html">Inbox</a></li>
-                <li class="header__menuItem"><a href="{% url 'new-painting' %}" class="btn btn--sub">Add
-                        Painting</a></li>
-                <li class="header__menuItem"><a href="login.html" class="btn btn--sub">Login/Sign Up</a></li>
+                <li class="header__menuItem"><a href="{% url 'inbox' %}">Inbox</a></li>
+
+                {% if request.user.is_authenticated %}
+                <li class="header__menuItem"><a href="{% url 'account' %}" class="btn btn--sub">Account</a>
+                </li>
+                <li class="header__menuItem"><a href="{% url 'logout-user' %}" class="btn btn--sub">Logout</a>
+                </li>
+                {% else %}
+                <li class="header__menuItem"><a href="{% url 'login-user' %}" class="btn btn--sub">Login/Sign Up</a>
+                </li>
+                {% endif %}
             </ul>
         </nav>
     </div>

@@ -1,19 +1,12 @@
 {% extends 'main.html' %}
-{% load static %}
-{% block content %}
-<!-- <h1>painting form</h1>
-<form action="" method="Post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit">
-</form> -->
+{% load static %}{% block content %}
 
 
 <!-- Main Section -->
 <main class="formPage my-xl">
     <div class="content-box">
         <div class="formWrapper">
-            <a class="backButton" href="#"><i class="im im-angle-left"><img
+            <a class="backButton" href="javascript:history.back()"><i class="im im-angle-left"><img
                         src="{% static 'images/back_arrow.png' width=40 height=40 %}"></img></a>
             <br>
 

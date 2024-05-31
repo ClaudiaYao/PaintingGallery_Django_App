@@ -1,0 +1,129 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Main Section -->
+<main class="settingsPage profile my-md">
+    <div class="container">
+        <div class="layout">
+            <div class="column column--1of3">
+                <div class="card text-center">
+                    <div class="card__body dev">
+                        <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-account' %}"><i
+                                class="im im-edit"></i> Edit</a>
+                        <img class="avatar avatar--xl dev__avatar" src="{{profile.profile_image.url}}" />
+                        <h2 class="dev__name">{{profile.username}}</h2>
+                        <p class="dev__title">{{profile.short_intro}}</p>
+                        <p class="dev__location">Based in {{profile.location}}</p>
+                        <ul class="dev__social">
+                            {% if profile.social_github %}
+                            <li>
+                                <a title="Github" href="{{profile.social_github}}" target="_blank"><img
+                                        src="{% static 'images/github_logo.png' %}" alt="Github Logo" width="40"
+                                        height="40" /></a>
+                            </li>
+                            {% endif %}
+
+                            {% if profile.social_twitter %}
+                            <li>
+                                <a title="Twitter" href="{{profile.social_twitter}}" target="_blank"><img
+                                        src="{% static 'images/twitter_logo.png' %}" alt="Twitter Logo" width="40"
+                                        height="40" /></a>
+                            </li>
+                            {% endif %}
+
+                            {% if profile.social_linkedin %}
+                            <li>
+                                <a title="LinkedIn" href="{{ profile.social_linkedin }}" target="_blank"><img
+                                        src="{% static 'images/linkedin_logo.png' %}" alt="Linkedin Logo" width="40"
+                                        height="40" /></a>
+                            </li>
+                            {% endif %}
+
+                            {% if profile.social_website %}
+                            <li>
+                                <a title="Personal Website" href="{{ profile.social_website }}" target="_blank"><img
+                                        src="{% static 'images/website_logo.png' %}" alt="Website Logo" width="40"
+                                        height="40" /></a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        <a href="#" class="btn btn--sub btn--lg">Send Message </a>
+                    </div>
+                </div>
+            </div>
+            <div class="column column--2of3">
+                <div class="devInfo">
+                    <h3 class="devInfo__title">About Me</h3>
+                    <p class="devInfo__about">
+                        {{profile.short_intro}}
+                        <br />
+                        {{profile.bio}}
+                    </p>
+                </div>
+                <div class="settings">
+                    <h3 class="settings__title">Skills</h3>
+                    <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'create-skill' %}"><i
+                            class="im im-plus"></i> Add
+                        Skill</a>
+                </div>
+
+                <table class="settings__table">
+                    {% for skill in skills %}
+
+                    <tr>
+                        <td class="settings__tableInfo">
+                            <h4>{{skill.name}}</h4>
+                            <p>
+                                {{skill.description}}
+                            </p>
+                        </td>
+                        <td class="settings__tableActions">
+                            <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-skill' skill.id %}"><i
+                                    class="im im-edit"></i>
+                                Edit</a>
+                            <a class="tag tag--pill tag--main settings__btn" href="{% url 'delete-skill' skill.id %}"><i
+                                    class="im im-x-mark-circle-o"></i>
+                                Delete</a>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                </table>
+
+                <div class="settings">
+                    <h3 class="settings__title">Projects</h3>
+                    <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'new-painting' %}"><i
+                            class="im im-plus"></i> Add
+                        Project</a>
+                </div>
+
+                <table class="settings__table">
+                    {% for painting in profile.painting_set.all %}
+                    <tr>
+                        <td class="settings__thumbnail">
+                            <a href="{% url 'painting' painting.id %}"><img src="{{painting.featured_image.url}}"
+                                    alt="Project Thumbnail" /></a>
+                        </td>
+                        <td class="settings__tableInfo">
+                            <a href="{% url 'painting' painting.id %}">{{painting.title}}</a>
+                            <p>
+                                {{painting.description}}
+                            </p>
+                        </td>
+                        <td class="settings__tableActions">
+                            <a class="tag tag--pill tag--main settings__btn"
+                                href="{% url 'update-painting' painting.id %}"><i class="im im-edit"></i>
+                                Edit</a>
+                            <a class="tag tag--pill tag--main settings__btn"
+                                href="{% url 'delete-painting' painting.id %}"><i class="im im-x-mark-circle-o"></i>
+                                Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

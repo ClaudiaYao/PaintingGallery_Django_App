@@ -11,7 +11,6 @@ let alertWrapper = document.querySelector(".alert");
 let alertClose = document.querySelector(".alert__close");
 
 if (alertWrapper) {
-console.log("Alert wrapper clicked!");
 addEventListener("click", () => {
 console.log("enter into");
   alertWrapper.style.display = 'none';
