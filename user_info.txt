@@ -1,8 +1,0 @@
-super user: claudia_2030
-pwd: same as gmail
-
-user: david
-pwd: Yq78xxxx
-
-user: raymond
-pwd: Yq78xxxx

@@ -1,4 +1,4 @@
-from django.urls import path 
+from django.urls import path
 from . import views
 
 urlpatterns = [
@@ -15,5 +15,6 @@ urlpatterns = [
     path("inbox/", views.inbox, name="inbox"),
     path("message/<str:pk>", views.viewMessage, name="view-message"),
     path("create-message/<str:pk>", views.createMessage, name="create-message"),
+
 ]
 
