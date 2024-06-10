@@ -35,8 +35,7 @@
                 <div class="column">
                     <div class="card project">
                         <a href="{% url 'painting' painting.id %}" class="project">
-                            <img class="project__thumbnail" src="{{painting.featured_image.url}}"
-                                alt="project thumbnail" />
+                            <img class="project__thumbnail" src="{{painting.imageURL}}" alt="project thumbnail" />
                             <div class="card__body">
                                 <h3 class="project__title">{{painting.title}}</h3>
                                 <p><a class="project__author" href="{% url 'single-profile' painting.owner.id %}">By

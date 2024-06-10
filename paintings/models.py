@@ -4,7 +4,7 @@ from users.models import Profile
 
 # Create your models here.
 class Painting(models.Model):
-    owner = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.SET_NULL)
+    owner = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     featured_image = models.ImageField(null=True, blank=True, default="default.png")
     demo_link = models.TextField(max_length=500, null=True, blank=True)
@@ -17,7 +17,15 @@ class Painting(models.Model):
 
     def __str__(self):
         return self.title
-
+    
+    @property
+    def imageURL(self):
+        try:
+            url = self.featured_image.url
+        except:
+            url = ""
+        return url 
+    
     @property
     def reviewers(self):
         queryset = self.review_set.all().values_list('owner__id', flat=True)

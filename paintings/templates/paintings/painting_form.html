@@ -20,11 +20,48 @@
                 </div>
                 {% endfor %}
 
+                {% for tag in painting.tags.all %}
+                <div class="project-tag tag tag--pill tag--main" data-tag="{{tag.id}}" data-painting="{{painting.id}}">
+                    {{tag.name}} &#215;</div>
+                {% endfor %}
+
+                <div class="form__field">
+                    <label for="formInput#text">New Tags (separate each tag 🏷️ with semi-colon)</label>
+                    <textarea class="input" name="newtags" placeholder="Add new tags here..."></textarea>
+                </div>
+
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+            </form>
         </div>
-        <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
-        </form>
-    </div>
     </div>
 </main>
 
+<script>
+    tags = document.getElementsByClassName("project-tag");
+    if (tags) {
+        for (let i = 0; i < tags.length; i++) {
+            let tag = tags[i];
+            tag.addEventListener("click", (e) => {
+                let paintingID = e.currentTarget.dataset.painting;
+                let tagID = e.currentTarget.dataset.tag;
+
+                fetch("http://127.0.0.1:8000/api/remove-tag/", {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "painting": paintingID,
+                        "tag": tagID
+                    })
+                }).then(response => response.json()).then(() => {
+                    // use e.currentTarget will generate error
+                    e.target.remove();
+                })
+
+            })
+        }
+    }
+
+</script>
 {% endblock content %}

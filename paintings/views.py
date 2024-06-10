@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 # from django.http import HttpResponse
-from .models import Painting
+from .models import Painting, Tag
 from .forms import PaintingForm, ReviewForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -37,11 +37,18 @@ def createPainting(request):
     form = PaintingForm()
 
     if request.method == "POST":
+        new_tags = request.POST.get('newtags').split(";")
         form = PaintingForm(request.POST, request.FILES)
         if form.is_valid:
             painting  = form.save(commit=False)
             painting.owner = request.user.profile
             painting.save()
+
+            for tag in new_tags:
+                tag = tag.strip()
+                new_tag, created = Tag.objects.get_or_create(name=tag)
+                painting.tags.add(new_tag)
+            
             return redirect("paintings")
 
     context = {"form": form}
@@ -54,12 +61,19 @@ def updatePainting(request, pk):
     form = PaintingForm(instance=paintObj)
 
     if request.method == "POST":
-        form = PaintingForm(request.POST, request.FILE, instance=paintObj)
+        new_tags = request.POST.get('newtags').split(";")
+
+        form = PaintingForm(request.POST, request.FILES, instance=paintObj)
         if form.is_valid:
             form.save()
-            return redirect("paintings")
+            for tag in new_tags:
+                tag = tag.strip()
+                new_tag, created = Tag.objects.get_or_create(name=tag)
+                paintObj.tags.add(new_tag)
 
-    context = {"form": form}
+            return redirect("painting", pk= paintObj.id)
+
+    context = {"form": form, "painting": paintObj}
     return render(request, "paintings/painting_form.html", context)
 
 @login_required(login_url="login-user")

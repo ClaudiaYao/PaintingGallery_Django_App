@@ -11,8 +11,8 @@
             <div class="column column--1of3">
                 <div class="card text-center">
                     <div class="card__body dev">
-                        <img class="avatar avatar--xl" src="{{ profile.profile_image.url }}" />
-                        <h2 class="dev__name">{{profile.username}}</h2>
+                        <img class="avatar avatar--xl" src="{{ profile.imageURL}}" />
+                        <h2 class="dev__name">{{profile.name}}</h2>
                         <p class="dev__title">{{profile.short_intro}}</p>
                         <p class="dev__location">Based in {{profile.location}}</p>
                         <ul class="dev__social">
@@ -49,7 +49,7 @@
                             </li>
                             {% endif %}
                         </ul>
-                        {% if request.user.profile.id != profile.id %}
+                        {% if request.user.profile != profile %}
                         <a href="{% url 'create-message' profile.id %}" class="btn btn--sub btn--lg">Send Message </a>
                         {% endif %}
                     </div>
@@ -59,7 +59,8 @@
                 <div class="devInfo">
                     <h3 class="devInfo__title">About Me</h3>
                     <p class="devInfo__about">
-                        {{profile.short_intro}}
+                        <strong class="devSkill__title">{{profile.name}} -
+                            {{profile.short_intro}}</strong>
                         <br />
                         {{profile.bio}}
                     </p>
@@ -95,7 +96,7 @@
                         <div class="column">
                             <div class="card project">
                                 <a href="{% url 'painting' painting.id %}" class="project">
-                                    <img class="project__thumbnail" src="{{painting.featured_image.url}}"
+                                    <img class="project__thumbnail" src="{{painting.imageURL}}"
                                         alt="painting thumbnail" />
                                     <div class="card__body">
                                         <h3 class="project__title">{{painting.title}}</h3>

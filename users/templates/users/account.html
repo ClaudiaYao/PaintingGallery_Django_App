@@ -11,7 +11,7 @@
                     <div class="card__body dev">
                         <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-account' %}"><i
                                 class="im im-edit"></i> Edit</a>
-                        <img class="avatar avatar--xl dev__avatar" src="{{profile.profile_image.url}}" />
+                        <img class="avatar avatar--xl dev__avatar" src="{{profile.imageURL}}" />
                         <h2 class="dev__name">{{profile.username}}</h2>
                         <p class="dev__title">{{profile.short_intro}}</p>
                         <p class="dev__location">Based in {{profile.location}}</p>
@@ -102,7 +102,7 @@
                     {% for painting in profile.painting_set.all %}
                     <tr>
                         <td class="settings__thumbnail">
-                            <a href="{% url 'painting' painting.id %}"><img src="{{painting.featured_image.url}}"
+                            <a href="{% url 'painting' painting.id %}"><img src="{{painting.imageURL}}"
                                     alt="Project Thumbnail" /></a>
                         </td>
                         <td class="settings__tableInfo">

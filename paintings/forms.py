@@ -5,7 +5,7 @@ from django import forms
 class PaintingForm(ModelForm):
     class Meta:
         model = Painting
-        fields = ['title', 'featured_image', 'description', 'demo_link', 'tags']
+        fields = ['title', 'featured_image', 'description', 'demo_link']
 
         widgets = {
             "tags": forms.CheckboxSelectMultiple(),

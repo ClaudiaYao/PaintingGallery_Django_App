@@ -5,7 +5,6 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 def paginatePaintings(request, paintings, num_per_page):
     page = request.GET.get("page")
-    print("page:", page)
     paginator = Paginator(paintings, num_per_page)
 
     try:

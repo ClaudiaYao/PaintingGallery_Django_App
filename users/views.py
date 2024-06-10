@@ -157,7 +157,7 @@ def viewMessage(request, pk):
     return render(request, "users/message.html", context)
 
 
-@login_required(login_url="login-user")
+# @login_required(login_url="login-user")
 def createMessage(request, pk):
     recipient_profile = Profile.objects.get(id=pk)
     form = MessageForm()
@@ -168,7 +168,7 @@ def createMessage(request, pk):
         sender = None
 
     if request.method == "POST":
-        form = SkillForm(request.POST)
+        form = MessageForm(request.POST)
         if form.is_valid():
             message = form.save(commit=False)
             message.sender = sender
@@ -179,7 +179,9 @@ def createMessage(request, pk):
                 message.email = sender.email
             message.save()     
             messages.success(request, "new message was created.")       
-            return redirect("profile", id=recipient_profile.id)
+            return redirect("single-profile", pk=recipient_profile.id)
+        else:
+            print("wrong form input")
         
     context = {"form": form, "recipient_profile_id": recipient_profile.id}
     return render(request, "users/message_form.html", context)

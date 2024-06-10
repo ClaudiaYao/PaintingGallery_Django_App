@@ -8,13 +8,19 @@
         <div class="message">
             <a class="backButton" href="{% url 'inbox' %}"><i class="im im-angle-left"><img
                         src="{% static 'images/back_arrow.png' width=40 height=40 %}"></img></i></a>
-            <h2 class="message__subject">{{message.subject}}</h4>
-                <a href="profile.html" class="message__author">{{message.name}}</a>
-                <p class="message__date">{{message.created}}</p>
-                <div class="message__body">
-                    {{message.body}}
-                    <br><br><br><br>
-                </div>
+            <h2 class="message__subject">{{message.subject}}</h2>
+
+            {% if message.sender %}
+            <a href="{% url 'single-profile' message.sender.id %}" class="message__author">{{message.name}}</a>
+            {% else %}
+            <p class="message__author">{{message.name}}</p>
+            {% endif %}
+
+            <p class="message__date">{{message.created}}</p>
+            <div class="message__body">
+                {{message.body}}
+                <br><br><br><br>
+            </div>
         </div>
     </div>
 </main>

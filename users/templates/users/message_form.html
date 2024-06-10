@@ -11,7 +11,7 @@
 
             <h2>Create a New Message</h2>
 
-            <form class="form" method="POST" action="{% url 'single-profile' recipient_profile_id %}">
+            <form class="form" method="POST">
                 {% csrf_token %}
 
                 {% if request.user.is_authenticated == False %}
