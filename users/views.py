@@ -39,7 +39,7 @@ def registerUser(request):
 
             messages.success(request, "User account was created.")
             login(request, user)
-            return redirect("single-profile")
+            return redirect("profiles")
         else:
             messages.error(request, "Error has occured during registration.")
 
@@ -54,9 +54,13 @@ def logoutUser(request):
     # return render(request, "users/login_register.html", context = {"page": "login"})
 
 def profiles(request):
-    profiles, search_query = searchProfile(request)
-    profiles, custom_range = paginateProfiles(request, profiles, 3)
+    profiles, search_query = searchProfile(request)    
+    for profile in profiles:
+        print(profile.username)
 
+    profiles, custom_range = paginateProfiles(request, profiles, 3)
+    
+    
     context = {"profiles": profiles, "search_query": search_query, "custom_range": custom_range}
     return render(request, "users/profiles.html", context)
 

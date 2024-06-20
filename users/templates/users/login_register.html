@@ -59,8 +59,15 @@
                 {% for field in form %}
                 <div class="form__field">
                     <label for="formInput#text">{{field.label}}</label>
+
+                    {% if field.label == "Password" or field.label == "Password confirmation" %}
+                    <input class="input input--text" id="formInput#text" type="password" name="{{field.name}}"
+                        placeholder="e.g. 123456" />
+
+                    {% else %}
                     <input class="input input--text" id="formInput#text" type="text" name="{{field.name}}"
                         placeholder="e.g. dave123" />
+                    {% endif %}
 
                     <!-- {% if field.help_text %}
                     <small>{{field.help_text}}</small>

@@ -21,7 +21,7 @@
                 <li class="header__menuItem"><a href="{% url 'account' %}" class="btn btn--sub">Account</a>
                 </li>
                 <li class="header__menuItem"><a href="{% url 'logout-user' %}" class="btn btn--sub"><span
-                            style="color:white">{{request.user.profile.name}}&nbsp;📌&nbsp;</span>Logout</a>
+                            style="color:white">{{request.user.username}}&nbsp;📌&nbsp;</span>Logout</a>
                 </li>
                 {% else %}
                 <li class="header__menuItem"><a href="{% url 'login-user' %}" class="btn btn--sub">Login/Sign Up</a>

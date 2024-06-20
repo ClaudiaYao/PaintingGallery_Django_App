@@ -7,18 +7,18 @@ def paginateProfiles(request, profiles, num_per_page):
     paginator = Paginator(profiles, num_per_page)
 
     try:
-        profiles = paginator.page(page)
+        user_profiles = paginator.page(page)
     except PageNotAnInteger:
         page = 1
-        profiles = paginator.page(page)
+        user_profiles = paginator.page(page)
     except EmptyPage:
         page = paginator.num_pages
-        profiles = paginator.page(page)
+        user_profiles = paginator.page(page)
 
     left_index = max(int(page)-3, 1)
     right_index = min(left_index + 4, paginator.num_pages + 1)
     custom_range = range(left_index, right_index)
-    return profiles, custom_range
+    return user_profiles, custom_range
 
 
 def searchProfile(request):
@@ -27,7 +27,6 @@ def searchProfile(request):
 
     if request.GET.get("search_query"):
         search_query = request.GET.get("search_query")
-        print(search_query)
 
     skills = Skill.objects.filter(name__iexact=search_query)
     profiles = Profile.objects.distinct().filter(

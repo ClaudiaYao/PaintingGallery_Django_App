@@ -10,6 +10,7 @@ Besides those normal Python pakages, you need to install the following extra pac
 https://www.django-rest-framework.org/
 - install simple jwt: pip install djangorestframework-simplejwt
 - install cors header: pip install django-cors-headers
+- install postgresql adapter if you want to switch to use Postgresql dtabase: pip install psycopg2
 
 ## How to Run
 Go to the root path of the project, and type "python manage.py runserver"
