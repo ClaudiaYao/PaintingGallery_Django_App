@@ -141,7 +141,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'PaintGallery',
         "USER": 'postgres',
-        'PASSWORD': 'Yq780320',
+        'PASSWORD': 'xxxxxx',
         'HOST': 'localhost',
         'PORT': '5432',
 
